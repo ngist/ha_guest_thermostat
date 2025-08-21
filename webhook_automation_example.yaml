@@ -1,0 +1,33 @@
+alias: Adjust Guest Thermostat Setpoints
+description: ""
+triggers:
+  - trigger: webhook
+    allowed_methods:
+      - POST
+      - PUT
+    local_only: true
+    webhook_id: "-CHANGEME"
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.json.room == 'front_bedroom' }}"
+        sequence:
+          - action: climate.set_temperature
+            metadata: {}
+            data:
+              value: "{{ trigger.json.temp_setpoint | int }}"
+            target:
+              entity_id: climate.front_bedroom_hp_front_bedroom_heatpump
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.json.room == 'rear_bedroom' }}"
+        sequence:
+          - action: climate.set_temperature
+            metadata: {}
+            data:
+              value: "{{ trigger.json.temp_setpoint | int }}"
+            target:
+              entity_id: climate.rear_bedroom_hp_rear_bedroom_heatpump
+mode: restart

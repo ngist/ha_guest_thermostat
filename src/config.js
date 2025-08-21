@@ -24,6 +24,10 @@ const entity_map = {
       boiler_thermostat_entity: "climate.rear_bedroom_thermostat"
   },
 };
+const friendly_name_map = {
+    front_bedroom: "Front Bedroom Thermostat",
+    rear_bedroom: "Rear Bedroom Thermostat",
+};
 const debug = true;  // If set to true results of API queries will be written to console, error messages will be written to console regardless.
 
 // Max and min allowable setpoints

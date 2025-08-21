@@ -1,33 +1,70 @@
-// Copyright (c) 2025 by Simone Bernabè (https://codepen.io/simoberny/pen/wrGoZZ)
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+<!DOCTYPE html>
+<!-- 
+Original work Copyright (c) 2025 by Simone Bernabè (https://codepen.io/simoberny/pen/wrGoZZ) 
+Modified work Copyright (c) 2025 by Nat Gist (https://github.com/ngist/ha_guest_thermostat)
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Front Bedroom Thermostat</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="thermostat.css">
+</head>
+<body translate="no">
+<h1 id="heading"></h1>
 <div class="thermostat">
-  <div class="bar">
-    <div class="inner_bar"></div>
-    <div class='hold left'>
-      <div class='fill fill1'></div>
+    <div class="bar">
+      <div class="inner_bar"></div>
+      <div class='hold left'>
+        <div class='fill fill1'></div>
+      </div>
+      <div class='hold right'>
+        <div class='fill fill2'></div>
+      </div>
+      <span id="state"></span>
     </div>
-    <div class='hold right'>
-      <div class='fill fill2'></div>
+    <div class="number">
+      <span class="ext" id="setpoint">71</span>
     </div>
-    <span>Heating</span>
-  </div>
-  <div class="shadow">
-    <div class="shadow-cube"></div>
-  </div>
-  <div class="number">
-    <span class="ext">19</span>
-  </div>
-  <div class="center">
-    <span class="arrow minus"><i class="material-icons">keyboard_arrow_left</i></span>
-    <span class="arrow plus"><i class="material-icons">keyboard_arrow_right</i></span>
-    <div class="small">
-      <span class="heat">19</span>
+    <div class="center">
+      <span class="arrow minus"><i class="material-icons">keyboard_arrow_left</i></span>
+      <span class="arrow plus"><i class="material-icons">keyboard_arrow_right</i></span>
+      <div class="dial">
+        <span class="main" id="setpoint">71</span>
+      </div>
+      <div class="dial">
+        <span class="sub" id="current_temp">71</span>
+      </div>
     </div>
-  </div>
+    <!--<div class="shadow">-->
+    <!--  <div class="shadow-cube"></div>-->
+    <!--</div>-->
+    <div class="temp_point spoint">
+        <div class="setpoint"></div>
+    </div>
+    <div class="temp_point ctemp">
+        <div class="current"></div>
+    </div>
 </div>
+
+
+<script src="config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="ha_api.js"></script>
+<script src="thermostat-animation.js"></script>
+<script src="thermostat.js"></script>
+<script>
+$(".minus").mousedown(decrease_setpoint);
+$(".plus").mousedown(increase_setpoint);
+
+update_state()
+setInterval(update_state, 15000)
+</script>
+</body>
+</html>
